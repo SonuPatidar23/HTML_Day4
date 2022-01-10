@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta />
+    <title>HTML APIs </title>
+</head>
+<body>
+    <p>Click the bellow button for your coordinate</p>
+    <button onclick="getLocation()">Click Here</button>
+    <p id="demo"></p>
+    <script>
+        var x = document.getElementById("demo");
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+        function showPosition(position) {
+            x.innerHTML = "Latitude=>" + position.coords.latitude +
+                "<br>Longitude=>" + position.coords.longitude;
+        }
+        function showError(error) {
+            switch (error.code) {
+                case error.PERMISSION_DENIED:
+                    x.innerHTML = "User request for geolocation"
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    x.innerHTML = "Unable to display geolocation"
+                    break;
+                case error.TIMEOUT:
+                    x.innerHTML = "Time out for location"
+                    break;
+                case error.UNKNOWN_ERROR:
+                    x.innerHTML = "An unknown error occurred."
+                    break;
+            }
+        }
+    </script>
+    <hr />
+    <p>The name Which is Displaying under is desplaying with the help of localStorage in this data is stored using key value pairs</p>
+    <div id="result"></div>
+    <script>
+        if (typeof (Storage) !== "undefined") {
+            localStorage.setItem("lastname", "smith");
+            document.getElementById("result").innerHTML = localStorage.getItem("lastname");
+        } else {
+            document.getElementById("result").innerHTML = "Sorry , your browser does not support web storage__";
+        }
+    </script>
+    <hr />
+
+</body>
+</html>
